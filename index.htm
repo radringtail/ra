@@ -43,9 +43,10 @@
         </div>
         
         <div class="container site-content">
-            <table class="table table-striped table-hover border" id="gameTable">
+            <table class="table table-striped table-hover border" style="font-size: 1.25em;" id="gameTable">
                 <thead>
                 <tr>
+                    <th></th>
                     <th>Game</th>
                     <th>System</th>
                     <th>Achievements</th>
@@ -54,8 +55,10 @@
                 </thead>
                 <tbody>
                     <tr v-for="game in filteredItems">
+                        <td>
+                            <img :src="`https://media.retroachievements.org/${game.ImageIcon}`" class="rounded-4" style="height: 50px;" loading="lazy">
+                        </td>
                         <td class="align-middle">
-                            <img :src="`https://media.retroachievements.org/${game.ImageIcon}`" class="rounded-4 me-2" style="height: 60px;" loading="lazy">
                             <a :href="`https://retroachievements.org/game/${game.ID}`" target="_blank">
                                 <span v-html="game.Title"></span>
                             </a>
@@ -102,7 +105,8 @@
         })
 	
         gamesTable = $('#gameTable').DataTable({
-            paging: false
+            paging: false,
+            order: [[1, 'asc']]
         });
 
         $('#search').keyup(function(){
